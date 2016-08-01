@@ -1,10 +1,17 @@
 var name = getQueryVariable('name') || 'anonymous';
 var room = getQueryVariable('room');
-console.log(name,room)
+$('#room-name').html(room);
+
 var socket = io();
 
 socket.on('connect',function(){
-	console.log('connected to socket.io server')
+	console.log('connected to socket.io server');
+
+	socket.emit("joinRoom", {
+		name:name,
+		room:room
+	});
+	
 });
 
 socket.on('message',function(message){
@@ -26,7 +33,10 @@ $(document).ready(function(){
 			name:name,
 			text:message
 		})
-		$('#message-input').val('')
+		$('#message-input').val('');
+
+	
+		
 	})
 });
 
