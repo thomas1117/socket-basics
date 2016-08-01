@@ -5,8 +5,10 @@ socket.on('connect',function(){
 });
 
 socket.on('message',function(message){
-	console.log('new message ',message);
-	$('#message-list').append("<p>" + message + "</p>");
+
+	var momentTimestamp = moment.utc(message.timestamp);
+	
+	$('#message-list').append("<p>" + message.text + "</p>" + "<strong>" + momentTimestamp.local().format('h:mm a') +"</strong>");
 });
 
 
@@ -18,4 +20,7 @@ $(document).ready(function(){
 		socket.emit('message',{text:message})
 		$('#message-input').val('')
 	})
-})
+});
+
+
+
