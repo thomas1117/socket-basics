@@ -6,7 +6,7 @@ socket.on('connect',function(){
 
 socket.on('message',function(message){
 	console.log('new message ',message);
-	$('#message-list').append("<li>" + message + "</li>");
+	$('#message-list').append("<p>" + message + "</p>");
 });
 
 
